@@ -1,20 +1,32 @@
 ﻿@model IEnumerable<Product>
 
-
-
-
     <table class="table table-bordered table-striped">
 
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(m => m.ProductId)</th>
-                <th>@Html.DisplayNameFor(m => m.Image)</th>
+                <th style="width: 100px;">@Html.DisplayNameFor(m => m.ProductId)</th>
+                <th style="width: 100px;">@Html.DisplayNameFor(m => m.Image)</th>
                 <th>@Html.DisplayNameFor(m => m.ProductName)</th>
-                <th>@Html.DisplayNameFor(m => m.ProductPrice)</th>
+                <th style="width: 100px;">@Html.DisplayNameFor(m => m.ProductPrice)</th>
+                <th style="width: 130px;"></th>
 
             </tr>
         </thead>
         <tbody>
-            <h2>Hata aliyorum Product bilgilerini render edemedim .</h2>
+            @foreach(var prd in @Model)
+            {
+            <tr>
+                <td>@prd.ProductId</td>
+                <td>
+                    <img src="~/img/@prd.Image" class="img-fluid" alt="">
+                </td>
+                <td>@prd.ProductName</td>
+                <td>@prd.ProductPrice</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            }
         </tbody>
     </table>
