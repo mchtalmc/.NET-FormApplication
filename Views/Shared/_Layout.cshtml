@@ -26,6 +26,11 @@
                         </li> -->
                     </ul>
                 </div>
+                <form class="d-flex" asp-action="Index" method="get">
+                    <input type="search" name="searchString" value="@ViewBag.SearchString" placeholder="Keyword ?"
+                        class="form-control me-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
         </nav>
     </header>

@@ -12,9 +12,15 @@ public class HomeController : Controller
 
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string searchString)
     {
-        return View(Repository.Products);
+        var products = Repository.Products;
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            ViewBag.SearchString = searchString;
+            products = products.Where(p => p.ProductName.ToLower().Contains(searchString)).ToList();
+        }
+        return View(products);
     }
 
     public IActionResult Privacy()
