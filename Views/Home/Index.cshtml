@@ -1,52 +1,48 @@
-﻿@model IEnumerable<Product>
-    @{
-    ViewData["Title"]= "Home Page";
-    }
+﻿@model ProductViewModel
+@{
+ViewData["Title"]= "Home Page";
+}
 
-    <div class="card card-body my-3">
-        <form asp-action="Index" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-11">
-                        <select name="category" class="form-select" asp-items="@ViewBag.Categories">
-                            <option value="0">All Products</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+<div class="card card-body my-3">
+    <form asp-action="Index" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-11">
+                    <!-- Burda Degısen Categoryinın gozukmesı lazım ama hata alıyorum uzun suredir -->
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 
-    <table class="table table-bordered table-striped">
-
-        <thead>
-            <tr>
-                <th style="width: 100px;">@Html.DisplayNameFor(m => m.ProductId)</th>
-                <th style="width: 100px;">@Html.DisplayNameFor(m => m.Image)</th>
-                <th>@Html.DisplayNameFor(m => m.ProductName)</th>
-                <th style="width: 100px;">@Html.DisplayNameFor(m => m.ProductPrice)</th>
-                <th style="width: 130px;"></th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var prd in @Model)
-            {
-            <tr>
-                <td>@prd.ProductId</td>
-                <td>
-                    <img src="~/img/@prd.Image" class="img-fluid" alt="">
-                </td>
-                <td>@prd.ProductName</td>
-                <td>@prd.ProductPrice</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="width: 100px;">@Html.DisplayNameFor(m => m.Products[0].ProductId)</th>
+            <th style="width: 100px;">@Html.DisplayNameFor(m => m.Products[0].Image)</th>
+            <th>@Html.DisplayNameFor(m => m.Products[0].ProductName)</th>
+            <th style="width: 100px;">@Html.DisplayNameFor(m => m.Products[0].ProductPrice)</th>
+            <th style="width: 130px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var prd in Model.Products)
+        {
+        <tr>
+            <td>@prd.ProductId</td>
+            <td>
+                <img src="~/img/@prd.Image" class="img-fluid" alt="">
+            </td>
+            <td>@prd.ProductName</td>
+            <td>@prd.ProductPrice</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
