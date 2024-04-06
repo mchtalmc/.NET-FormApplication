@@ -11,16 +11,16 @@ namespace FormApplicationCourse.Models
         private static readonly List<Category> _categories = new();
         static Repository()
         {
-            _categories.Add(new Category { CategoryId = 1, CategoryName = "Phone" });
-            _categories.Add(new Category { CategoryId = 2, CategoryName = "Computer" });
+            _categories.Add(new Category { CategoryId = 1, Name = "Telefon" });
+            _categories.Add(new Category { CategoryId = 2, Name = "Bilgisayar" });
 
-            _products.Add(new Product { ProductId = 1, ProductName = "IPhone14", ProductPrice = 4000, Image = "1.jpg", CategoryId = 1 });
-            _products.Add(new Product { ProductId = 2, ProductName = "IPhone15", ProductPrice = 5000, Image = "2.jpg", CategoryId = 1 });
-            _products.Add(new Product { ProductId = 3, ProductName = "IPhone16", ProductPrice = 6000, Image = "3.jpg", CategoryId = 1 });
-            _products.Add(new Product { ProductId = 4, ProductName = "IPhone17", ProductPrice = 7000, Image = "4.jpg", CategoryId = 1 });
+            _products.Add(new Product { ProductId = 1, ProductName = "IPhone 14", Price = 40000, IsActive = true, Image = "1.jpg", CategoryId = 1 });
+            _products.Add(new Product { ProductId = 2, ProductName = "IPhone 15", Price = 50000, IsActive = false, Image = "2.jpg", CategoryId = 1 });
+            _products.Add(new Product { ProductId = 3, ProductName = "IPhone 16", Price = 60000, IsActive = true, Image = "3.jpg", CategoryId = 1 });
+            _products.Add(new Product { ProductId = 4, ProductName = "IPhone 17", Price = 70000, IsActive = false, Image = "4.jpg", CategoryId = 1 });
 
-            _products.Add(new Product { ProductId = 5, ProductName = "M1 Mac", ProductPrice = 6000, Image = "5.jpg", CategoryId = 2 });
-            _products.Add(new Product { ProductId = 6, ProductName = "Benim Cop Toshiba", ProductPrice = 500, Image = "6.jpg", CategoryId = 2 });
+            _products.Add(new Product { ProductId = 5, ProductName = "Macbook Air", Price = 80000, IsActive = false, Image = "5.jpg", CategoryId = 2 });
+            _products.Add(new Product { ProductId = 6, ProductName = "Macbook Pro", Price = 90000, IsActive = true, Image = "6.jpg", CategoryId = 2 });
         }
         public static List<Product> Products
         {
@@ -29,6 +29,7 @@ namespace FormApplicationCourse.Models
                 return _products;
             }
         }
+
         public static List<Category> Categories
         {
             get
