@@ -47,9 +47,33 @@ public class HomeController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Create(Product model)
+    public async Task<IActionResult> Create(Product model, IFormFile imageFile)
     {
-        Repository.CreateProduct(model);
-        return RedirectToAction("Index"); // Index sayfasina dondurmesi icin.
+        var allowedExtentions = new[] { "jpg", ".jpeg", ".png" };
+        var extension = Path.GetExtension(imageFile.FileName); // dosyanin uzantisini ogrenmek icin orn. asd.jpg (.jpg kismini aliyor.)
+        var randomFileName = string.Format($"{Guid.NewGuid()}{extension}"); // dosya adini kaydederken guid ile random bir sey olusturup +extension ile birlestirecek.
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", imageFile.FileName);
+        // path hangi klasore kaydedecegini belirliyorum.
+        if (imageFile != null)
+        {
+            if (!allowedExtentions.Contains(extension))
+            {
+                ModelState.AddModelError("", "Gecerli bir resim kullaniniz");
+            }
+        }
+        if (ModelState.IsValid)
+        {
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+            model.Image = randomFileName;
+            model.ProductId = Repository.Products.Count + 1;
+            Repository.CreateProduct(model);
+            return RedirectToAction("Index"); // Index sayfasina dondurmesi icin.
+        }
+        ViewBag.Categories = new SelectList(Repository.Categories, "CatehoryId", "Name");
+        return View(model);
+
     }
 }

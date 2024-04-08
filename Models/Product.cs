@@ -11,11 +11,13 @@ namespace FormApplicationCourse.Models
         [Display(Name = "Urun Id")]
         public int ProductId { get; set; }
 
-
+        [Required(ErrorMessage = "Zorunlu bir alan")]
+        [StringLength(100)]
         [Display(Name = "Urun Adı")]
         public string ProductName { get; set; } = null!;
 
-
+        [Required]
+        [Range(0, 100000)]
         [Display(Name = "Fiyat")]
         public decimal? Price { get; set; }
 
